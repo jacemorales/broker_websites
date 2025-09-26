@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fullName": "Demo User",
+      "email": "demo@example.com",
+      "password": "password123",
+      "phone": "123-456-7890",
+      "total_account_balance": 10000,
+      "investment_balance": 0,
+      "investments": []
+    }
+  ]
+}

@@ -1,0 +1,843 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Rajdhani:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #0D0221; /* Void Black */
+    --secondary-color: #2D033B; /* Nebula Purple */
+    --accent-color: #810CA8; /* Cyber Purple */
+    --highlight-color: #C147E9; /* Hyper Pink */
+    --text-color: #F0F0F0;
+    --glow-color: rgba(193, 71, 233, 0.5);
+    --green: #00FFAB;
+    --red: #FF4D4D;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--primary-color);
+    background-image: linear-gradient(180deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0 0 5px var(--glow-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--highlight-color);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px var(--glow-color);
+}
+
+header {
+    background: rgba(13, 2, 33, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(193, 71, 233, 0.3);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+}
+
+nav .logo a {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    position: absolute;
+    top: 2.2rem;
+    right: 5%;
+}
+
+nav .nav-links li {
+    margin-left: 30px;
+}
+
+main {
+    width: 90%;
+    margin: auto;
+}
+
+.hero {
+    text-align: center;
+    padding: 8rem 0;
+    background: radial-gradient(ellipse at bottom, rgba(45, 3, 59, 0.5) 0%, transparent 70%);
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    color: #a0a0a0;
+}
+
+.cta-button {
+    background: linear-gradient(45deg, var(--highlight-color), var(--accent-color));
+    color: var(--text-color);
+    padding: 15px 35px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    box-shadow: 0 0 15px var(--glow-color);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--glow-color);
+}
+
+.crypto-market {
+    padding: 4rem 0;
+}
+
+.crypto-market h2 {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.market-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+footer {
+    background: transparent;
+    text-align: center;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(193, 71, 233, 0.3);
+    margin-top: 4rem;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--secondary-color);
+    padding: 30px;
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: modalFadeIn 0.3s;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: var(--highlight-color);
+}
+
+#auth-modal-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+#auth-modal-content h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+#auth-modal-content label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+#auth-modal-content input {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-color);
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    border-radius: 5px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+}
+
+#auth-modal-content button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 2rem;
+    background: linear-gradient(45deg, var(--highlight-color), var(--accent-color));
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-family: 'Orbitron', sans-serif;
+    box-shadow: 0 0 15px var(--glow-color);
+    transition: transform 0.3s ease;
+}
+
+#auth-modal-content button:hover {
+    transform: scale(1.02);
+}
+
+#auth-modal-content p {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+#auth-modal-content a {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@keyframes cardFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.crypto-card {
+    background: rgba(45, 3, 59, 0.4);
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    animation: cardFadeIn 0.5s ease-out forwards;
+    animation-delay: calc(var(--card-index) * 100ms);
+}
+
+.crypto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--glow-color);
+}
+
+.crypto-card .card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.crypto-card .card-header img {
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+}
+
+.crypto-card .name-symbol p {
+    color: #a0a0a0;
+    font-size: 1rem;
+}
+
+.crypto-card .card-body .price {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.crypto-card .change.positive {
+    color: var(--green);
+}
+
+.crypto-card .change.negative {
+    color: var(--red);
+}
+
+.btn-invest {
+    width: 100%;
+    padding: 12px;
+    margin-top: 1.5rem;
+    background: transparent;
+    color: var(--highlight-color);
+    border: 1px solid var(--highlight-color);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.btn-invest:hover {
+    background: var(--highlight-color);
+    color: var(--text-color);
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* User Nav Dropdown */
+.user-nav {
+    position: relative;
+}
+
+.user-balance {
+    background: var(--accent-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-balance .arrow {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.user-nav:hover .arrow {
+    transform: rotate(180deg);
+}
+
+.modal-text {
+    font-style: italic;
+    color: #a0a0a0;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+#chart-title-container {
+    padding: 1rem 0;
+}
+
+#chart-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+#chart-subtitle {
+    font-size: 1rem;
+    color: #a0a0a0;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.chart-toggle .toggle-btn {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-toggle .toggle-btn svg {
+    fill: var(--accent-color);
+}
+
+.chart-toggle .toggle-btn.active svg {
+    fill: var(--primary-color);
+}
+
+/* Chart Toolbar Styling */
+.apexcharts-toolbar {
+    background: var(--secondary-color) !important;
+    border: 1px solid var(--accent-color) !important;
+    border-radius: 5px;
+}
+.apexcharts-toolbartoolbar-icon svg {
+    fill: var(--text-color) !important;
+}
+
+.chart-toggle .toggle-btn:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.chart-toggle .toggle-btn:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: none;
+}
+
+.chart-toggle .toggle-btn.active {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.chart-tooltip {
+    padding: 0.5rem 1rem;
+    background: var(--primary-color);
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+}
+
+.chart-tooltip small {
+    display: block;
+    color: #a0a0a0;
+    margin-top: 0.25rem;
+}
+
+/* Make ApexCharts annotations match the theme */
+.apexcharts-point-annotations .apexcharts-marker {
+    stroke-width: 3px;
+}
+.apexcharts-point-annotations .apexcharts-point-annotation-label {
+    border-radius: 5px;
+    padding: 4px 8px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    background-color: var(--secondary-color) !important;
+    color: #fff !important;
+}
+
+.no-investments {
+    text-align: center;
+    padding: 4rem;
+    font-size: 1.2rem;
+    color: #a0a0a0;
+}
+
+#investment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#investment-form input, #top-up-form input {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-color);
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    border-radius: 5px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+}
+
+#investment-form button, #top-up-form button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 1rem;
+    background: linear-gradient(45deg, var(--highlight-color), var(--accent-color));
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-family: 'Orbitron', sans-serif;
+}
+
+#investment-form select, #top-up-form select {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-color);
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    border-radius: 5px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23F0F0F0%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: .65em auto;
+}
+
+.investment-info {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+}
+
+.investment-info p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.investment-info span {
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 1rem;
+    width: 250px;
+    z-index: 1002;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.user-dropdown .dropdown-header {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.user-dropdown .dropdown-email {
+    color: #a0a0a0; /* Muted text */
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.user-dropdown hr {
+    border: none;
+    border-top: 1px solid var(--accent-color);
+    margin: 1rem 0;
+}
+
+.user-dropdown .logout-button, .user-dropdown .top-up-button {
+    background: var(--highlight-color);
+    color: var(--text-color);
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.user-dropdown .top-up-button {
+    background: var(--accent-color);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.hamburger .line {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+.nav-close-btn-container {
+    display: none; /* Hidden on desktop */
+}
+
+/* Learn Page Styles */
+.learn-main {
+    padding: 2rem 0;
+}
+
+.learn-hero {
+    text-align: center;
+    padding: 4rem 1rem; /* Added horizontal padding */
+    background-color: rgba(45, 3, 59, 0.4);
+    border-radius: 8px;
+    margin-bottom: 3rem;
+    border: 1px solid var(--accent-color);
+}
+
+.learn-hero h1 {
+    font-size: 2.5rem; /* A safe, large size */
+}
+
+.learn-content article {
+    background: rgba(45, 3, 59, 0.4);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid var(--accent-color);
+}
+
+.learn-content h2 {
+    font-size: 2rem;
+    color: var(--highlight-color);
+    margin-bottom: 1rem;
+}
+
+.learn-content p {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+/* Investment Section */
+.user-investments {
+    padding: 4rem 0;
+}
+
+.user-investments h2 {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.investments-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.investment-card {
+    background: rgba(45, 3, 59, 0.4);
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.investment-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+
+.investment-card-header h3 {
+    font-size: 1.8rem;
+    color: var(--highlight-color);
+}
+
+.investment-card-header p {
+    font-size: 1.5rem;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.investment-card-body p {
+    color: #a0a0a0;
+    margin-bottom: 0.5rem;
+}
+
+.investment-status {
+    font-weight: 700;
+    margin-top: 1rem;
+}
+
+.status-matured {
+    color: var(--green);
+}
+
+.status-active {
+    color: var(--text-color);
+}
+
+.investment-card-footer {
+    margin-top: 1.5rem;
+}
+
+.btn-withdraw-investment {
+    width: 100%;
+    padding: 12px;
+    background: var(--green);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    transition: background 0.3s ease;
+}
+
+.btn-withdraw-investment:hover:not(:disabled) {
+    background: #00e6a1;
+}
+
+.btn-withdraw-investment:disabled {
+    background: #555;
+    color: #888;
+    cursor: not-allowed;
+}
+
+
+/* Duration Radio Buttons in Modal */
+.duration-options {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.duration-options input[type="radio"] {
+    display: none; /* Hide original radio button */
+}
+
+.duration-options label {
+    flex: 1;
+    text-align: center;
+    padding: 10px 15px;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.duration-options label:first-of-type {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.duration-options label:last-of-type {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: none;
+}
+
+.duration-options input[type="radio"]:checked + label {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}
+
+
+/* All Mobile Styles Last */
+@media screen and (max-width: 768px) {
+    .hero-content h1 { font-size: 2.5rem; }
+    .hero-content p { font-size: 1.2rem; }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--secondary-color);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1001;
+        padding-left: 0;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .nav-links.active {
+        transform: translateX(0%);
+    }
+
+    .nav-close-btn-container {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+    }
+
+    .nav-close-btn {
+        font-size: 3rem;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .nav-close-btn:hover {
+        transform: rotate(90deg);
+    }
+
+    .nav-links li {
+        margin: 1.5rem 0;
+    }
+
+    .nav-links li a {
+        font-size: 1.5rem;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hamburger.active .line:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    .hamburger.active .line:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active .line:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    .modal-content {
+        padding: 20px;
+        width: 95%;
+    }
+
+    .modal-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .learn-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .learn-hero h1 {
+        font-size: 1.8rem;
+    }
+}
