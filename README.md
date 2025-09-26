@@ -1,7 +1,7 @@
 # 🌍 Broker Websites Portfolio</h1>
 
-<h3 align="center">
-  A growing <b>open-source collection</b> of broker websites.  
+<h3>
+  A growing <b>open-source collection</b> of broker websites.<br>
   Built, shared, and maintained by the community.  
 </h3>
 
