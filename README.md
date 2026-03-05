@@ -30,7 +30,7 @@ NovaBank is a professional fintech prototype featuring a fully functional fronte
 2. Ensure you have the following column headers in the first row (Sheet1):
    - `Full Name`, `Date of Birth`, `Email`, `Phone Number`, `SSN`, `Tax ID`, `Supabase ID File URL`, `Account Balance`, `Account ID`, `Created Date`
 
-#### Google Apps Script Proxy (Recommended for Prototype)
+#### Google Apps Script Proxy
 To allow the frontend to write to the spreadsheet without OAuth, use a Google Apps Script:
 1. In your spreadsheet, go to **Extensions** > **Apps Script**.
 2. Paste the following script:
@@ -100,16 +100,14 @@ function doGet(e) {
 3. Deploy the script as a **Web App** with access set to "Anyone".
 4. Copy the **Web App URL**.
 
-### 3. Environment Variables
+### 3. Configuration
 
-Create a `.env` file in the `banking-platform` directory:
+For this prototype, the credentials have been hardcoded for immediate functionality.
 
-```env
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-VITE_SPREADSHEET_ID=1PlLTM9X0G1_4sMN8e2mXzowq1NnCHk
-VITE_APPS_SCRIPT_URL=your_google_apps_script_url
-```
+- **Supabase Configuration**: Located in `src/lib/supabase.ts`
+- **Google Sheets Configuration**: Located in `src/services/googleSheets.ts`
+
+To update these, modify the constants directly in the code.
 
 ---
 
@@ -117,7 +115,7 @@ VITE_APPS_SCRIPT_URL=your_google_apps_script_url
 
 1. **Install Dependencies**:
    ```bash
-   npm install
+   npm install --legacy-peer-deps
    ```
 
 2. **Run Development Server**:
@@ -140,8 +138,8 @@ VITE_APPS_SCRIPT_URL=your_google_apps_script_url
 ## 🔒 Security & Architecture
 
 - **Data Privacy**: SSNs and Tax IDs are handled via secure HTTPS requests.
-- **Frontend Safety**: Environment variables are used to keep API keys configurable.
-- **Architecture**: Serverless approach using React, Supabase, and Google Sheets API.
+- **Architecture**: Serverless approach using React, Supabase, and Google Sheets API proxy.
+- **Duplicate Prevention**: Registration logic checks for existing records before allowing new signups.
 
 ---
 

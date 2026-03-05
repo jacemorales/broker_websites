@@ -46,32 +46,27 @@ const RegisterPage: React.FC = () => {
         throw new Error('Please upload your Government ID.');
       }
 
-      let publicUrl = 'https://via.placeholder.com/150?text=Mock+ID+File';
-
-      // 1. Upload ID to Supabase Storage (if configured)
-      const isSupabaseConfigured = (import.meta.env.VITE_SUPABASE_ANON_KEY &&
-                                   import.meta.env.VITE_SUPABASE_ANON_KEY !== 'your-anon-key');
-
-      if (isSupabaseConfigured) {
-        const fileExt = file.name.split('.').pop();
-        const fileName = `${Math.random()}.${fileExt}`;
-        const filePath = `ids/${fileName}`;
-
-        const { error: uploadError } = await supabase.storage
-          .from('banking-ids')
-          .upload(filePath, file);
-
-        if (uploadError) throw uploadError;
-
-        // 2. Get Public URL
-        const { data: { publicUrl: url } } = supabase.storage
-          .from('banking-ids')
-          .getPublicUrl(filePath);
-
-        publicUrl = url;
-      } else {
-        console.warn('Supabase not configured, using mock ID URL');
+      // Check for existing account
+      const existingUser = await googleSheetsService.findUser(formData.email, formData.ssn);
+      if (existingUser) {
+        throw new Error('An account with this email or SSN already exists.');
       }
+
+      // 1. Upload ID to Supabase Storage
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random()}.${fileExt}`;
+      const filePath = `ids/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('banking-ids')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      // 2. Get Public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('banking-ids')
+        .getPublicUrl(filePath);
 
       // 3. Prepare User Record
       const newUser: UserRecord = {
@@ -182,6 +177,7 @@ const RegisterPage: React.FC = () => {
                   label="Tax ID / EIN"
                   name="taxId"
                   placeholder="12-3456789"
+                  required
                   value={formData.taxId}
                   onChange={handleChange}
                 />
