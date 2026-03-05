@@ -40,7 +40,7 @@ const LoginPage: React.FC = () => {
       }
     } catch (err: any) {
       console.error(err);
-      setError('An error occurred during login. Please try again.');
+      setError(err.message || 'An error occurred during login. Please try again.');
     } finally {
       setLoading(false);
     }

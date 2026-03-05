@@ -39,13 +39,23 @@ export const googleSheetsService = {
     console.log(`Searching for user with Email: ${email} and SSN: ${ssn}`);
 
     try {
-      const response = await axios.get(`${APPS_SCRIPT_URL}?action=getUser&email=${email}&ssn=${ssn}`);
+      const response = await axios.post(APPS_SCRIPT_URL, JSON.stringify({
+        action: 'getUser',
+        email,
+        ssn
+      }), {
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        }
+      });
+
       // Google Apps Script might return null or the user object
-      if (!response.data || typeof response.data !== 'object') return null;
+      if (response.data === null) return null;
+      if (typeof response.data !== 'object') return null;
       return response.data as UserRecord;
     } catch (error) {
       console.error('Error fetching from Google Sheet:', error);
-      return null;
+      throw new Error('Connection Error: Could not reach the database. Please ensure your Google Apps Script is deployed as a Web App and the URL in src/services/googleSheets.ts is correct.');
     }
   }
 };
