@@ -2,7 +2,8 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Button from './Button';
-import { Landmark, Menu, X, User, LogOut } from 'lucide-react';
+import { Menu, X, User, LogOut } from 'lucide-react';
+import logo from '../../assets/logo.png';
 
 const Navbar: React.FC = () => {
   const { user, logout, isAuthenticated } = useAuth();
@@ -20,7 +21,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-2 text-bank-700 font-bold text-xl">
-              <Landmark className="w-8 h-8" />
+              <img src={logo} alt="NovaBank Logo" className="w-10 h-10 object-contain" />
               <span>NovaBank</span>
             </Link>
           </div>

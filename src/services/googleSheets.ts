@@ -30,7 +30,7 @@ export const googleSheetsService = {
     console.log('Creating user in Google Sheets:', user);
 
     // In a real implementation, you would POST to a Google Apps Script URL
-    const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL;
+    const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL || '';
 
     if (APPS_SCRIPT_URL) {
       try {

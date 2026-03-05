@@ -33,7 +33,70 @@ NovaBank is a professional fintech prototype featuring a fully functional fronte
 #### Google Apps Script Proxy (Recommended for Prototype)
 To allow the frontend to write to the spreadsheet without OAuth, use a Google Apps Script:
 1. In your spreadsheet, go to **Extensions** > **Apps Script**.
-2. Paste a script that handles `doPost(e)` and `doGet(e)` to append/fetch rows.
+2. Paste the following script:
+
+```javascript
+const SPREADSHEET_ID = '1PlLTM9X0G1_4sMN8e2mXzowq1NnCHk';
+const SHEET_NAME = 'Sheet1';
+
+function doPost(e) {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = ss.getSheetByName(SHEET_NAME);
+  const body = JSON.parse(e.postData.contents);
+  const data = body.data;
+
+  if (body.action === 'createUser') {
+    sheet.appendRow([
+      data.fullName,
+      data.dob,
+      data.email,
+      data.phone,
+      data.ssn,
+      data.taxId,
+      data.idFileUrl,
+      data.accountBalance,
+      data.accountId,
+      data.createdDate
+    ]);
+    return ContentService.createTextOutput(JSON.stringify({ status: 'success' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = ss.getSheetByName(SHEET_NAME);
+  const action = e.parameter.action;
+
+  if (action === 'getUser') {
+    const email = e.parameter.email;
+    const ssn = e.parameter.ssn;
+    const rows = sheet.getDataRange().getValues();
+
+    for (let i = 1; i < rows.length; i++) {
+      if (rows[i][2] === email && rows[i][4] === ssn) {
+        const user = {
+          fullName: rows[i][0],
+          dob: rows[i][1],
+          email: rows[i][2],
+          phone: rows[i][3],
+          ssn: rows[i][4],
+          taxId: rows[i][5],
+          idFileUrl: rows[i][6],
+          accountBalance: rows[i][7],
+          accountId: rows[i][8],
+          createdDate: rows[i][9]
+        };
+        return ContentService.createTextOutput(JSON.stringify(user))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+    return ContentService.createTextOutput(JSON.stringify(null))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+```
+
 3. Deploy the script as a **Web App** with access set to "Anyone".
 4. Copy the **Web App URL**.
 
