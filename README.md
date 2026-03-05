@@ -62,7 +62,7 @@ The error `No 'Access-Control-Allow-Origin' header` on `getUser` happens because
 
 ### 2. Google Sheets Setup (Database)
 
-1. Open the [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1PlLTM9X0G1_4sMN8e2mXzowq1NnCHk).
+1. Open the [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1PlLTM9X0G1_4sMN8e2mXzowq1NnCHk-4GEh-lB1Yeko).
 2. Ensure you have the following column headers in the first row (Sheet1):
    - `Full Name`, `Date of Birth`, `Email`, `Phone Number`, `SSN`, `Tax ID`, `Supabase ID File URL`, `Account Balance`, `Account ID`, `Created Date`
 
@@ -72,7 +72,7 @@ To allow the frontend to write to the spreadsheet without OAuth, use a Google Ap
 2. Paste the following script:
 
 ```javascript
-const SPREADSHEET_ID = '1PlLTM9X0G1_4sMN8e2mXzowq1NnCHk';
+const SPREADSHEET_ID = '1PlLTM9X0G1_4sMN8e2mXzowq1NnCHk-4GEh-lB1Yeko';
 const SHEET_NAME = 'Sheet1';
 
 function doPost(e) {

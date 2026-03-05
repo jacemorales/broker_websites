@@ -13,7 +13,7 @@ export interface UserRecord {
   createdDate: string;
 }
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxWXewbQ0Pc_YJhf7aEx9nbXbMEQV3r0aVtlKq0xjxi07Q-eX0S75ykfgEEYDRUqbpJUA/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwk3fh3uM4iOSNDpaM3MxUYYiptFYJNRwGvasbryxfIpVvSgZqB0GX80Iy-OaSYzv0dbg/exec';
 
 export const googleSheetsService = {
   async createUser(user: UserRecord): Promise<void> {
