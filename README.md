@@ -45,17 +45,21 @@ The error `No 'Access-Control-Allow-Origin' header` on `getUser` happens because
 2. Navigate to **Storage** and create a new bucket named `banking-ids`.
 3. Set the bucket to **Public**.
 4. **Important: Storage Policies (RLS)**
-   - Click on the `banking-ids` bucket.
-   - Go to the **Policies** tab.
-   - Click **New Policy** and select **For full customization**.
-   - Create an **INSERT** policy:
-     - Policy name: `Allow public upload`
-     - Allowed operations: `INSERT`
-     - Target roles: `anon`
-   - Create a **SELECT** policy:
-     - Policy name: `Allow public read`
-     - Allowed operations: `SELECT`
-     - Target roles: `anon`
+   - The error `new row violates row-level security policy` means you haven't enabled permissions for uploads.
+   - Go to **Storage** -> **Policies**.
+   - Under the `banking-ids` bucket, click **New Policy**.
+   - Select **Get started quickly** (or **For full customization**).
+   - **Important**: Create TWO policies:
+     1. **INSERT Policy**:
+        - Policy name: `Allow Public Upload`
+        - Allowed operations: `INSERT`
+        - Target roles: `anon`
+        - Definition: `true` (if using customization)
+     2. **SELECT Policy**:
+        - Policy name: `Allow Public Read`
+        - Allowed operations: `SELECT`
+        - Target roles: `anon`
+        - Definition: `true`
 5. Go to **Project Settings** > **API** to get your:
    - `Project URL`
    - `anon public API Key`

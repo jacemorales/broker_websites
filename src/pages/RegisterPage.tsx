@@ -61,7 +61,12 @@ const RegisterPage: React.FC = () => {
         .from('banking-ids')
         .upload(filePath, file);
 
-      if (uploadError) throw uploadError;
+      if (uploadError) {
+        if (uploadError.message.includes('row-level security')) {
+          throw new Error('Supabase Storage Error: Access Denied. Please ensure you have enabled "INSERT" and "SELECT" policies for the "anon" role on your "banking-ids" bucket in the Supabase Dashboard.');
+        }
+        throw uploadError;
+      }
 
       // 2. Get Public URL
       const { data: { publicUrl } } = supabase.storage
